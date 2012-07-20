@@ -31,9 +31,10 @@ still has not found the requested name, it will raise a `ReferenceError`.
     // script B
     var foo = '42'
 
-The above two scripts do **not** have the same effect. Script A defines a 
-variable called `foo` in the *global* scope, and script B defines a `foo` in the
-*current* scope.
+The above two scripts do **not** have the same effect.
+Script A defines a property called `foo` on the *global object* (window in browsers, global in node),
+while script B defines a variable `foo` in the *current* scope.
+> **Note:** while a property can be deleted a variable can't.
 
 Again, that is **not** at all the *same effect*: not using `var` can have major 
 implications.
@@ -48,9 +49,9 @@ implications.
     foo; // 21
 
 Leaving out the `var` statement inside the function `test` will override the 
-value of `foo`. While this might not seem like a big deal at first, having 
-thousands of lines of JavaScript and not using `var` will introduce horrible,
-hard-to-track-down bugs.
+value of `foo` defined in the global scope.
+While this might not seem like a big deal at first, having thousands of lines
+of JavaScript and not using `var` will introduce horrible, hard-to-track-down bugs.
     
     // global scope
     var items = [/* some list */];
